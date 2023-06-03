@@ -16,6 +16,14 @@ const Images = {
 
   profile_outline: require('./assets/images/chat.png'),
   profile_filled: require('./assets/images/chat_active.png'),
+  dot: require('./assets/images/dot.png'),
+
+  like_outline: require('./assets/images/heart.png'),
+  like_filled: require('./assets/images/heart_active.png'),
+
+  comment: require('./assets/images/comment.png'),
+  share: require('./assets/images/share.png'),
+  save: require('./assets/images/save.png'),
 };
 
 export default Images;

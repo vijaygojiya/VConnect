@@ -1,13 +1,13 @@
-import {View} from 'react-native';
 import React from 'react';
 import ApplicationNavigator from './src/navigators/Application';
 import {Layout} from './src/theme';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App = () => {
   return (
-    <View style={Layout.fill}>
+    <GestureHandlerRootView style={Layout.fill}>
       <ApplicationNavigator />
-    </View>
+    </GestureHandlerRootView>
   );
 };
 

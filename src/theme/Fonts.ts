@@ -14,12 +14,16 @@ const Fonts = StyleSheet.create({
     color: Colors.black,
   },
   textTinyPlus: {
-    fontSize: FontSize.tinyPlus,
+    fontSize: FontSize.small,
     color: Colors.black,
   },
   textSmall: {
     fontSize: FontSize.small,
     color: Colors.black,
+  },
+  textRegular: {
+    fontSize: FontSize.regular,
+    color: Colors.primaryText,
   },
   textSmallPlus: {
     fontSize: FontSize.smallPlus,

@@ -1,0 +1,127 @@
+import {
+  FlatList,
+  ImageBackground,
+  ListRenderItem,
+  Text,
+  View,
+  ViewToken,
+} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
+import styles from './styles';
+import PostHeader from '../PostHeader';
+import PostFooter from '../PostFooter';
+import {Fonts, Images, Layout, StyleConfig} from '../../theme';
+import DoubleTap from '../DoubleTap';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
+
+interface PostPropsType {
+  post_id: string;
+  user_id: string;
+  caption: string;
+  photos: string[];
+  likes: string[];
+  saved_by: string[];
+  comments: string[];
+  shares: number;
+  hidden_by: string[];
+  reported_by: string[];
+  created_at: FirebaseFirestoreTypes.FieldValue;
+  updated_at: FirebaseFirestoreTypes.FieldValue;
+}
+
+const ITEM_WIDTH = StyleConfig.width;
+const Post = ({photos}: PostPropsType) => {
+  const [selectedPostIndex, setSelectedPostIndex] = useState(0);
+  const scale = useSharedValue(0);
+
+  const renderPostPhotoItem: ListRenderItem<string> = ({item}) => {
+    return (
+      <ImageBackground
+        source={{uri: item}}
+        resizeMode="cover"
+        style={[styles.postPhoto, Layout.center]}>
+        <Animated.Image
+          source={Images.like_filled}
+          style={[styles.heartIcon, animatedHeartIconStyle]}
+        />
+      </ImageBackground>
+    );
+  };
+
+  const animatedHeartIconStyle = useAnimatedStyle(() => ({
+    transform: [{scale: Math.max(scale.value, 0)}],
+  }));
+
+  const handleSingleTapOnPostImage = () => {
+    console.log('single tap');
+  };
+
+  const handleViewableItemsChangedRef = useRef(
+    (info: {viewableItems: ViewToken[]; changed: ViewToken[]}) => {
+      if (info.viewableItems.length > 0) {
+        const index = info.viewableItems[0].index;
+        setSelectedPostIndex(index ?? 0);
+      }
+    },
+  );
+  const viewConfigRef = useRef({viewAreaCoveragePercentThreshold: 50});
+
+  const handleDoubleTapForLikePost = () => {
+    scale.value = 0;
+    scale.value = withSpring(1, {velocity: 10}, isFinished => {
+      if (isFinished) {
+        scale.value = withDelay(200, withTiming(0, {duration: 200}));
+      }
+    });
+  };
+  return (
+    <View>
+      <PostHeader
+        userName="vm_gojiya"
+        userProfilePic={photos[0]}
+        location="Hidden in the leaves"
+      />
+      <DoubleTap
+        onDoubleTap={handleDoubleTapForLikePost}
+        onSingleTap={handleSingleTapOnPostImage}>
+        <FlatList
+          horizontal={true}
+          overScrollMode="never"
+          bounces={false}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => `postsPhotoList-${item}`}
+          data={photos}
+          renderItem={renderPostPhotoItem}
+          viewabilityConfig={viewConfigRef.current}
+          onViewableItemsChanged={handleViewableItemsChangedRef.current}
+          getItemLayout={(_, index) => ({
+            length: ITEM_WIDTH,
+            offset: ITEM_WIDTH * index,
+            index,
+          })}
+        />
+      </DoubleTap>
+      {photos.length > 1 ? (
+        <Text
+          style={[
+            Fonts.textInterSemiBold,
+            Fonts.textSmall,
+            styles.currentPostNumber,
+          ]}>
+          {selectedPostIndex + 1}/{photos.length}
+        </Text>
+      ) : null}
+      <PostFooter />
+    </View>
+  );
+};
+
+export default Post;
