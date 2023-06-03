@@ -41,8 +41,6 @@ const CustomTabBar = (props: {navigation: any}) => {
 
   const currentIndex =
     useNavigationState(state => state.routes[0].state?.index) ?? 0;
-  // const currentRouteName = navigationState.routes[navigationState.index].name;
-  console.log('currentRouteName', currentIndex);
 
   const onTabClick = (selectedRoute: Routes) => {
     navigation.navigate(selectedRoute);

@@ -18,6 +18,9 @@ const IteTab = ({
   isSelected,
 }: ItemTab) => {
   const handleTabIconClick = () => {
+    if (isSelected) {
+      return;
+    }
     onTabItemClickHandler(route);
   };
   return (
