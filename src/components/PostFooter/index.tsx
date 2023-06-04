@@ -5,11 +5,15 @@ import styles from './styles';
 
 const PostFooter = () => {
   const [isLike, setIsLiked] = useState(false);
+  const [isSaved, setSaved] = useState(false);
 
   const handleLikePost = () => {
     setIsLiked(prev => !prev);
   };
 
+  const handleSavePost = () => {
+    setSaved(prev => !prev);
+  };
   return (
     <View style={[Layout.row, styles.container]}>
       <Pressable onPress={handleLikePost}>
@@ -30,11 +34,13 @@ const PostFooter = () => {
         resizeMode="contain"
       />
       <View style={Layout.fill} />
-      <Image
-        source={Images.save}
-        resizeMode="contain"
-        style={styles.postActionsIcon}
-      />
+      <Pressable onPress={handleSavePost}>
+        <Image
+          source={isSaved ? Images.save_filled : Images.save_outline}
+          resizeMode="contain"
+          style={styles.postActionsIcon}
+        />
+      </Pressable>
     </View>
   );
 };

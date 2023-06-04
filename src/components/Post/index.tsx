@@ -7,7 +7,7 @@ import {
   ViewToken,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
-import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
+// import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import styles from './styles';
 import PostHeader from '../PostHeader';
 import PostFooter from '../PostFooter';
@@ -22,18 +22,21 @@ import Animated, {
 } from 'react-native-reanimated';
 
 interface PostPropsType {
-  post_id: string;
-  user_id: string;
+  post_id: number;
+  user_id: number;
   caption: string;
   photos: string[];
-  likes: string[];
-  saved_by: string[];
-  comments: string[];
+  likes: number;
+  saved_by: number[];
+  comments: {
+    user_id: number;
+    comment: string;
+  }[];
   shares: number;
-  hidden_by: string[];
-  reported_by: string[];
-  created_at: FirebaseFirestoreTypes.FieldValue;
-  updated_at: FirebaseFirestoreTypes.FieldValue;
+  hidden_by: number[];
+  reported_by: number[];
+  created_at: string;
+  updated_at: string;
 }
 
 const ITEM_WIDTH = StyleConfig.width;

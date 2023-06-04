@@ -23,7 +23,8 @@ const Images = {
 
   comment: require('./assets/images/comment.png'),
   share: require('./assets/images/share.png'),
-  save: require('./assets/images/save.png'),
+  save_outline: require('./assets/images/save.png'),
+  save_filled: require('./assets/images/save_active.png'),
 };
 
 export default Images;
