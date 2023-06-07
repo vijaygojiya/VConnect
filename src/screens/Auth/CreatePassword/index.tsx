@@ -3,6 +3,7 @@ import React, {useRef, useState} from 'react';
 import {Fonts, Layout} from '../../../theme';
 import {Button, TextInput} from '../../../components';
 import {Routes} from '../../../navigators/routes';
+import styles from './styles';
 
 const CreatePassword = ({navigation, route}) => {
   const [tiPassword, setPassword] = useState('');
@@ -18,7 +19,7 @@ const CreatePassword = ({navigation, route}) => {
   };
 
   return (
-    <View style={[Layout.fill]}>
+    <View style={[styles.container, Layout.fill]}>
       <Text
         style={[
           Layout.selfCenter,
@@ -41,8 +42,7 @@ const CreatePassword = ({navigation, route}) => {
         onSubmitEditing={handleNextClick}
       />
       {/* TODO: check box */}
-      <Text
-        style={[Layout.selfCenter, Fonts.textInterRegular, Fonts.textTinyPlus]}>
+      <Text style={[Fonts.textInterRegular, Fonts.textTinyPlus]}>
         Remember password
       </Text>
       <Button

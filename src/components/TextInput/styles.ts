@@ -1,12 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {Colors, Padding} from '../../theme';
+import {Colors, Margin, Padding, Sizes} from '../../theme';
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#EEEEEE',
-    marginVertical: 7,
-    marginHorizontal: 40,
-    borderRadius: 4,
+    marginVertical: Margin.smallPlus,
+    borderRadius: Sizes.cornerRadius.small,
     borderWidth: 1,
     borderColor: Colors.darkModeGray50,
   },

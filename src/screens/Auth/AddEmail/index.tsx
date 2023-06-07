@@ -5,6 +5,7 @@ import {Button, TextInput} from '../../../components';
 import {Routes} from '../../../navigators/routes';
 import useUserRegistration from '../../../hooks/use-userRegistration';
 import {CommonActions} from '@react-navigation/native';
+import styles from './styles';
 
 const AddEmailScreen = ({navigation, route}) => {
   const [tiEmail, setEmail] = useState('');
@@ -28,7 +29,7 @@ const AddEmailScreen = ({navigation, route}) => {
   };
 
   return (
-    <View style={[Layout.fill]}>
+    <View style={[styles.container, Layout.fill]}>
       <Text
         style={[
           Layout.selfCenter,

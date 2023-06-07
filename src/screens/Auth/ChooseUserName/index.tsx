@@ -4,6 +4,7 @@ import {Fonts, Layout} from '../../../theme';
 import {Button, TextInput} from '../../../components';
 import {Routes} from '../../../navigators/routes';
 import {useCheckUsernameAvailability} from '../../../hooks';
+import styles from './styles';
 
 const ChooseUserName = ({navigation}) => {
   const [tiUserName, setUserName] = useState('');
@@ -20,7 +21,7 @@ const ChooseUserName = ({navigation}) => {
     setUserName(text);
   };
   return (
-    <View style={[Layout.fill]}>
+    <View style={[styles.container, Layout.fill]}>
       <Text
         style={[
           Layout.selfCenter,
@@ -43,10 +44,7 @@ const ChooseUserName = ({navigation}) => {
       />
       {!isUserNameAvailable && tiUserName && (
         <Text
-          style={[
-            Fonts.textInterRegular,
-            {color: 'red', marginHorizontal: 40, marginVertical: 4},
-          ]}>
+          style={[Fonts.textInterRegular, {color: 'red', marginVertical: 4}]}>
           The user {tiUserName} is not available.
         </Text>
       )}

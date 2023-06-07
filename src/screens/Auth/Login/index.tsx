@@ -63,7 +63,6 @@ const LoginScreen = ({navigation}) => {
       );
     } catch (error) {
       console.log('eee', error);
-      throw error;
     }
   };
   const handleSignUpClick = () => {
@@ -71,7 +70,7 @@ const LoginScreen = ({navigation}) => {
   };
 
   return (
-    <View style={[Layout.fill, Layout.justifyContentCenter]}>
+    <View style={[styles.container, Layout.fill, Layout.justifyContentCenter]}>
       <Image
         source={Images.text_logo}
         style={[Layout.selfCenter, styles.logo]}

@@ -6,7 +6,7 @@ export default function useCheckUsernameAvailability(username: string) {
   const [isUserNameAvailable, setUserNameAvailable] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
-  const debounceUserNameValue = useDebounce(username, 250);
+  const debounceUserNameValue = useDebounce(username, 350);
   useEffect(() => {
     handleCheckUserNameAvailable(debounceUserNameValue);
   }, [debounceUserNameValue]);
