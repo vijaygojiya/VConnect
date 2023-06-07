@@ -1,22 +1,23 @@
 import {Image, Pressable, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {Images, Layout} from '../../theme';
 import styles from './styles';
 
-const PostFooter = () => {
-  const [isLike, setIsLiked] = useState(false);
-  const [isSaved, setSaved] = useState(false);
-
-  const handleLikePost = () => {
-    setIsLiked(prev => !prev);
-  };
-
-  const handleSavePost = () => {
-    setSaved(prev => !prev);
-  };
+interface PostFooterPropsType {
+  isLike: boolean;
+  isSaved: boolean;
+  likePostHandler: () => void;
+  savePostHandler: () => void;
+}
+const PostFooter = ({
+  isLike,
+  isSaved,
+  likePostHandler,
+  savePostHandler,
+}: PostFooterPropsType) => {
   return (
     <View style={[Layout.row, styles.container]}>
-      <Pressable onPress={handleLikePost}>
+      <Pressable onPress={likePostHandler}>
         <Image
           source={isLike ? Images.like_filled : Images.like_outline}
           style={[styles.postActionsIcon, isLike && Layout.removeTintColor]}
@@ -34,7 +35,7 @@ const PostFooter = () => {
         resizeMode="contain"
       />
       <View style={Layout.fill} />
-      <Pressable onPress={handleSavePost}>
+      <Pressable onPress={savePostHandler}>
         <Image
           source={isSaved ? Images.save_filled : Images.save_outline}
           resizeMode="contain"
