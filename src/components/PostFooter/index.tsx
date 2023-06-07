@@ -1,7 +1,12 @@
 import {Image, Pressable, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Images, Layout} from '../../theme';
 import styles from './styles';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 interface PostFooterPropsType {
   isLike: boolean;
@@ -15,14 +20,34 @@ const PostFooter = ({
   likePostHandler,
   savePostHandler,
 }: PostFooterPropsType) => {
+  useEffect(() => {
+    handleAnimate();
+  }, [isLike]);
+
+  const handleAnimate = () => {
+    scale.value = 0.8;
+    scale.value = withSpring(1);
+  };
+  const scale = useSharedValue(1);
+  const animatedHeartStyle = useAnimatedStyle(() => ({
+    transform: [{scale: scale.value}],
+  }));
   return (
     <View style={[Layout.row, styles.container]}>
       <Pressable onPress={likePostHandler}>
-        <Image
-          source={isLike ? Images.like_filled : Images.like_outline}
-          style={[styles.postActionsIcon, isLike && Layout.removeTintColor]}
-          resizeMode="contain"
-        />
+        {({pressed}) => (
+          <Animated.Image
+            source={
+              pressed || isLike ? Images.like_filled : Images.like_outline
+            }
+            style={[
+              styles.postActionsIcon,
+              (isLike || pressed) && Layout.removeTintColor,
+              animatedHeartStyle,
+            ]}
+            resizeMode="contain"
+          />
+        )}
       </Pressable>
       <Image
         source={Images.comment}
