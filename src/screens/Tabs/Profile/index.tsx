@@ -23,9 +23,7 @@ const ProfileScreen = ({navigation}) => {
     }
   };
   return (
-    <View style={[Layout.fill, Layout.center]}>
-      <Text>ProfileScreen</Text>
-
+    <View style={[Layout.fill, Layout.justifyContentCenter]}>
       <Button title="Logout" onPress={handleLogout} />
     </View>
   );
