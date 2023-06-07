@@ -15,6 +15,7 @@ const HomeScreen = () => {
     <View style={[Layout.fill, Layout.center, styles.container]}>
       <FlatList
         data={postsData}
+        showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) =>
           `homeFeedPostListItem-${item.post_id}${index}`
         }

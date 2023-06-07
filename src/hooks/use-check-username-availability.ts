@@ -12,6 +12,9 @@ export default function useCheckUsernameAvailability(username: string) {
   }, [debounceUserNameValue]);
 
   const handleCheckUserNameAvailable = async (_username: string) => {
+    if (!_username) {
+      return;
+    }
     try {
       setIsLoading(true);
       setUserNameAvailable(true);

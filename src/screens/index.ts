@@ -1,5 +1,4 @@
 export {default as LoginScreen} from './Auth/Login';
-export {default as SignUpScreen} from './Auth/SignUp';
 export {default as SplashScreen} from './Auth/Splash';
 export {default as HomeScreen} from './Tabs/Home';
 export {default as SearchScreen} from './Tabs/Search';

@@ -14,7 +14,6 @@ import {
   ChooseUserNameScreen,
   CreatePasswordScreen,
   LoginScreen,
-  SignUpScreen,
   SplashScreen,
 } from '../screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -36,7 +35,6 @@ const ApplicationNavigator = () => {
             }}>
             <Stack.Screen name={Routes.SplashScreen} component={SplashScreen} />
             <Stack.Screen name={Routes.LogInScreen} component={LoginScreen} />
-            <Stack.Screen name={Routes.SignUpScreen} component={SignUpScreen} />
             <Stack.Screen
               name={Routes.ChooseUserNameScreen}
               component={ChooseUserNameScreen}
