@@ -9,8 +9,8 @@ const Images = {
   search_outline: require('./assets/images/search.png'),
   search_filled: require('./assets/images/search_active.png'),
 
-  plus_outline: require('./assets/images/plus.png'),
-  plus_filled: require('./assets/images/plus_active.png'),
+  plus_outline: require('./assets/images/plus_border.png'),
+  plus_filled: require('./assets/images/plus_border_active.png'),
 
   reel_outline: require('./assets/images/reel.png'),
   reel_filled: require('./assets/images/reel_active.png'),
@@ -26,6 +26,9 @@ const Images = {
   share: require('./assets/images/share.png'),
   save_outline: require('./assets/images/save.png'),
   save_filled: require('./assets/images/save_active.png'),
+  plus: require('./assets/images/plus.png'),
+  chat: require('./assets/images/chat.png'),
+
 };
 
 export default Images;

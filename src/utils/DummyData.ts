@@ -194,3 +194,114 @@ export const postsData = [
     updated_at: '2023-06-03 08:45:00',
   },
 ];
+
+export const dummyStoriesData = [
+  {
+    userName: 'vm_gojiya',
+    profilePic: postUrls[1],
+    stories: [
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[2],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[3],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[4],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+    ],
+  },
+  {
+    userName: 'kishan',
+    profilePic: postUrls[0],
+    stories: [
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[5],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[6],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[7],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+    ],
+  },
+  {
+    userName: 'ajay',
+    profilePic: postUrls[8],
+    stories: [
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[3],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[2],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[9],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+    ],
+  },
+  {
+    userName: 'Sagar',
+    profilePic: postUrls[10],
+    stories: [
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[11],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[2],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+      {
+        storyId: 'story1',
+        userId: 'user1',
+        mediaUrl: postUrls[12],
+        uploadTime: new Date(),
+        viewedBy: ['user1'],
+      },
+    ],
+  },
+];
