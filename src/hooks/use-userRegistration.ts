@@ -49,11 +49,8 @@ const useUserRegistration = () => {
         });
 
       await auth().signInWithEmailAndPassword(email, password);
-      console.log('User registered and data stored successfully!');
     } catch (error) {
-      console.error('Error registering user:', error);
       setError(error.message);
-      throw error;
     } finally {
       setLoading(false);
     }

@@ -15,7 +15,6 @@ const useUserLogin = () => {
 
       console.log('User logged in successfully!');
     } catch (error) {
-      console.error('Error logging in user:', error);
       setError(error.message);
       throw error;
     } finally {
