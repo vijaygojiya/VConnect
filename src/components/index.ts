@@ -7,3 +7,4 @@ export {default as GradientBorder} from './GradientBorder';
 export {default as Story} from './Story';
 export {default as MenuBar} from './MenuBar';
 export {default as MenuBarWithLogo} from './MenuBarWithLogo';
+export {default as PostGridItem} from './PostGridItem';

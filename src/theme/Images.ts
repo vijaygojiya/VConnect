@@ -28,7 +28,7 @@ const Images = {
   save_filled: require('./assets/images/save_active.png'),
   plus: require('./assets/images/plus.png'),
   chat: require('./assets/images/chat.png'),
-
+  multi_pages: require('./assets/images/multi_pages.png'),
 };
 
 export default Images;
