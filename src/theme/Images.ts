@@ -1,5 +1,6 @@
 const Images = {
   logo: require('./assets/images/insta_logo.png'),
+  text_logo: require('./assets/images/logos_instagram.png'),
 
   // tab bar icons
   home_outline: require('./assets/images/home.png'),

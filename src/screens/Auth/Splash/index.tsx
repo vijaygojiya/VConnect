@@ -3,6 +3,8 @@ import React, {useEffect} from 'react';
 import {Images, Layout} from '../../../theme';
 import styles from './styles';
 import {Routes} from '../../../navigators/routes';
+import {CommonActions, StackActions} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
@@ -15,7 +17,17 @@ const SplashScreen = ({navigation}) => {
   }, []);
 
   const handleAppNavFlow = () => {
-    navigation.replace(Routes.Dashboard);
+    const currentUser = auth().currentUser;
+    if (currentUser) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: Routes.Dashboard}],
+        }),
+      );
+    } else {
+      navigation.dispatch(StackActions.replace(Routes.LogInScreen));
+    }
   };
 
   return (

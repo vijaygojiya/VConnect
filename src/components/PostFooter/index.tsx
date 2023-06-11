@@ -1,27 +1,53 @@
 import {Image, Pressable, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {Images, Layout} from '../../theme';
 import styles from './styles';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
-const PostFooter = () => {
-  const [isLike, setIsLiked] = useState(false);
-  const [isSaved, setSaved] = useState(false);
+interface PostFooterPropsType {
+  isLike: boolean;
+  isSaved: boolean;
+  likePostHandler: () => void;
+  savePostHandler: () => void;
+}
+const PostFooter = ({
+  isLike,
+  isSaved,
+  likePostHandler,
+  savePostHandler,
+}: PostFooterPropsType) => {
+  useEffect(() => {
+    handleAnimate();
+  }, [isLike]);
 
-  const handleLikePost = () => {
-    setIsLiked(prev => !prev);
+  const handleAnimate = () => {
+    scale.value = 0.8;
+    scale.value = withSpring(1);
   };
-
-  const handleSavePost = () => {
-    setSaved(prev => !prev);
-  };
+  const scale = useSharedValue(1);
+  const animatedHeartStyle = useAnimatedStyle(() => ({
+    transform: [{scale: scale.value}],
+  }));
   return (
     <View style={[Layout.row, styles.container]}>
-      <Pressable onPress={handleLikePost}>
-        <Image
-          source={isLike ? Images.like_filled : Images.like_outline}
-          style={[styles.postActionsIcon, isLike && Layout.removeTintColor]}
-          resizeMode="contain"
-        />
+      <Pressable onPress={likePostHandler}>
+        {({pressed}) => (
+          <Animated.Image
+            source={
+              pressed || isLike ? Images.like_filled : Images.like_outline
+            }
+            style={[
+              styles.postActionsIcon,
+              (isLike || pressed) && Layout.removeTintColor,
+              animatedHeartStyle,
+            ]}
+            resizeMode="contain"
+          />
+        )}
       </Pressable>
       <Image
         source={Images.comment}
@@ -34,7 +60,7 @@ const PostFooter = () => {
         resizeMode="contain"
       />
       <View style={Layout.fill} />
-      <Pressable onPress={handleSavePost}>
+      <Pressable onPress={savePostHandler}>
         <Image
           source={isSaved ? Images.save_filled : Images.save_outline}
           resizeMode="contain"

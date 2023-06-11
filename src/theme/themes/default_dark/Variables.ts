@@ -1,4 +1,4 @@
-import { ThemeNavigationColors } from '../../../../@types/theme';
+import {ThemeNavigationColors} from '../../../../@types/theme';
 import Colors from '../../Colors';
 
 export const NavigationColors: Partial<ThemeNavigationColors> = {

@@ -42,7 +42,7 @@ const Fonts = StyleSheet.create({
     color: Colors.black,
   },
   textRegularBlack: {
-    fontSize: FontSize.regular,
+    fontSize: FontSize.plus,
     color: Colors.black,
   },
   textRegularWhite: {

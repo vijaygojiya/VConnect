@@ -41,6 +41,9 @@ interface PostPropsType {
 
 const ITEM_WIDTH = StyleConfig.width;
 const Post = ({photos}: PostPropsType) => {
+  const [isLike, setIsLiked] = useState(false);
+  const [isSaved, setSaved] = useState(false);
+
   const [selectedPostIndex, setSelectedPostIndex] = useState(0);
   const scale = useSharedValue(0);
 
@@ -77,12 +80,23 @@ const Post = ({photos}: PostPropsType) => {
   const viewConfigRef = useRef({viewAreaCoveragePercentThreshold: 50});
 
   const handleDoubleTapForLikePost = () => {
+    if (!isLike) {
+      setIsLiked(true);
+    }
     scale.value = 0;
     scale.value = withSpring(1, {velocity: 10}, isFinished => {
       if (isFinished) {
         scale.value = withDelay(200, withTiming(0, {duration: 200}));
       }
     });
+  };
+
+  const handleLikePost = () => {
+    setIsLiked(prev => !prev);
+  };
+
+  const handleSavePost = () => {
+    setSaved(prev => !prev);
   };
   return (
     <View>
@@ -122,7 +136,12 @@ const Post = ({photos}: PostPropsType) => {
           {selectedPostIndex + 1}/{photos.length}
         </Text>
       ) : null}
-      <PostFooter />
+      <PostFooter
+        isLike={isLike}
+        isSaved={isSaved}
+        likePostHandler={handleLikePost}
+        savePostHandler={handleSavePost}
+      />
     </View>
   );
 };

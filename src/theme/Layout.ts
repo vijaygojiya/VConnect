@@ -81,6 +81,9 @@ const Layouts = StyleSheet.create({
   selfStretch: {
     alignSelf: 'stretch',
   },
+  selfCenter: {
+    alignSelf: 'center',
+  },
   /* Sizes Layouts */
   fill: {
     flex: 1,

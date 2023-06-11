@@ -9,7 +9,13 @@ import React from 'react';
 
 import {Routes} from './routes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {LoginScreen, SignUpScreen, SplashScreen} from '../screens';
+import {
+  AddEmailScreen,
+  ChooseUserNameScreen,
+  CreatePasswordScreen,
+  LoginScreen,
+  SplashScreen,
+} from '../screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import TabNavigator from './TabNavigator';
 
@@ -29,7 +35,19 @@ const ApplicationNavigator = () => {
             }}>
             <Stack.Screen name={Routes.SplashScreen} component={SplashScreen} />
             <Stack.Screen name={Routes.LogInScreen} component={LoginScreen} />
-            <Stack.Screen name={Routes.SignUpScreen} component={SignUpScreen} />
+            <Stack.Screen
+              name={Routes.ChooseUserNameScreen}
+              component={ChooseUserNameScreen}
+            />
+            <Stack.Screen
+              name={Routes.CreatePasswordScreen}
+              component={CreatePasswordScreen}
+            />
+            <Stack.Screen
+              name={Routes.AddEmailScreen}
+              component={AddEmailScreen}
+            />
+
             <Stack.Screen name={Routes.Dashboard} component={TabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>

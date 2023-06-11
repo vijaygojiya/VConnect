@@ -1,12 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {Margin} from '../../../theme';
+import {Margin, Padding} from '../../../theme';
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Padding.default,
     marginHorizontal: Margin.large,
-  },
-  logo: {
-    marginBottom: Margin.defaultPlus,
   },
 });
 export default styles;
