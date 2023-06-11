@@ -130,6 +130,9 @@ const Layouts = StyleSheet.create({
   right0: {
     right: 0,
   },
+  removeTintColor: {
+    tintColor: undefined,
+  },
 });
 
 export default Layouts;

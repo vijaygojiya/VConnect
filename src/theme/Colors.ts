@@ -1,6 +1,11 @@
 export const Colors = {
   white: '#ffffff',
   black: '#000000',
+
+  //new
+
+  primaryText: '#262626',
+
   red: '#e5322d',
   blue: '#0088f8',
   lightBlue: '#add0ed',

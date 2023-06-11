@@ -1,0 +1,61 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/theme/assets/fonts/Inter-Bold.ttf",
+      "sha1": "444cdca680f8ce64c16fe5a606dcfbe4b33e7925"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-ExtraBold.ttf",
+      "sha1": "7547e67ff62f82c640e3075248bc6c822aee0855"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-ExtraLight.ttf",
+      "sha1": "da0dc1179ebdc16276e796eace4c09571f7e916d"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-Light.ttf",
+      "sha1": "732e278a85762a0edfb4e077e44e3eb39d8af92e"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-Medium.ttf",
+      "sha1": "9674d43c8207459a432863c47c3858d2244c19ec"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-Regular.ttf",
+      "sha1": "c2767d146c3c10fe6c9b8ac0f181ef907c111f19"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-SemiBold.ttf",
+      "sha1": "acda92adc6cf8c67c89395c65f371a4d2b05a783"
+    },
+    {
+      "path": "src/theme/assets/fonts/Inter-Thin.ttf",
+      "sha1": "d1b59b2d183df924230e894de9d63ab16563a574"
+    },
+    {
+      "path": "src/theme/assets/fonts/Poppins-Bold.ttf",
+      "sha1": "f68e7e93da3f4a710d28b0ee5f744b5112351401"
+    },
+    {
+      "path": "src/theme/assets/fonts/Poppins-Italic.ttf",
+      "sha1": "b2c040a2e8fa61c93c7c13814da0c5de5bae1220"
+    },
+    {
+      "path": "src/theme/assets/fonts/Poppins-Light.ttf",
+      "sha1": "987ef3e07d6361fbb658624e297750133f2343bd"
+    },
+    {
+      "path": "src/theme/assets/fonts/Poppins-Medium.ttf",
+      "sha1": "72b668cb1639c6b0588c6fffa1ae9a967409e8ae"
+    },
+    {
+      "path": "src/theme/assets/fonts/Poppins-Regular.ttf",
+      "sha1": "a4ef48c17479236fea2197b9a68bf7c6163e0388"
+    },
+    {
+      "path": "src/theme/assets/fonts/Poppins-SemiBold.ttf",
+      "sha1": "e1a01a240fb449797ac08a37490d59b61a059e6d"
+    }
+  ]
+}
