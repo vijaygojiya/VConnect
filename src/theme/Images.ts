@@ -21,6 +21,7 @@ const Images = {
 
   like_outline: require('./assets/images/heart.png'),
   like_filled: require('./assets/images/heart_active.png'),
+  like_filled_HQ: require('./assets/images/heart_HQ.png'),
 
   comment: require('./assets/images/comment.png'),
   share: require('./assets/images/share.png'),

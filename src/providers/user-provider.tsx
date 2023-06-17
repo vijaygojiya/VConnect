@@ -1,10 +1,9 @@
-import {createContext, useContext} from 'react';
+import React, {createContext, useContext} from 'react';
 import {useMMKVObject} from 'react-native-mmkv';
 import {UserDataType} from '../../@types/common';
-import React from 'react';
 
 interface ContextProps {
-  storedUser: UserDataType;
+  storedUser: UserDataType | undefined;
   setStoredUser: (value: UserDataType) => void;
 }
 
@@ -15,7 +14,8 @@ interface Props {
 }
 
 export function UserProvider({children}: Props) {
-  const [storedUser, setStoredUser] = useMMKVObject<UserDataType>('username');
+  const [storedUser, setStoredUser] =
+    useMMKVObject<UserDataType>('loggedInUser');
 
   return (
     <UserContext.Provider value={{storedUser, setStoredUser}}>
@@ -25,5 +25,9 @@ export function UserProvider({children}: Props) {
 }
 
 export function useUser() {
-  return useContext(UserContext);
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+  return context;
 }

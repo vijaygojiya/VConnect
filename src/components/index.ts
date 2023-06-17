@@ -8,3 +8,5 @@ export {default as Story} from './Story';
 export {default as MenuBar} from './MenuBar';
 export {default as MenuBarWithLogo} from './MenuBarWithLogo';
 export {default as PostGridItem} from './PostGridItem';
+export {default as ReelItem} from './ReelItem';
+export {default as AnimatedHeartIcon} from './AnimatedHeartIcon';

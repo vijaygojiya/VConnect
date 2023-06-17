@@ -41,7 +41,6 @@ const CustomTabBar = (props: {navigation: any}) => {
 
   const currentIndex =
     useNavigationState(state => {
-      console.log('state', state);
       return state.routes[0].state?.index;
     }) ?? 0;
 

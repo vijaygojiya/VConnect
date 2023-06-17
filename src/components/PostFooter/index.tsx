@@ -9,20 +9,20 @@ import Animated, {
 } from 'react-native-reanimated';
 
 interface PostFooterPropsType {
-  isLike: boolean;
+  isLiked: boolean;
   isSaved: boolean;
   likePostHandler: () => void;
   savePostHandler: () => void;
 }
 const PostFooter = ({
-  isLike,
+  isLiked,
   isSaved,
   likePostHandler,
   savePostHandler,
 }: PostFooterPropsType) => {
   useEffect(() => {
     handleAnimate();
-  }, [isLike]);
+  }, [isLiked]);
 
   const handleAnimate = () => {
     scale.value = 0.8;
@@ -38,11 +38,11 @@ const PostFooter = ({
         {({pressed}) => (
           <Animated.Image
             source={
-              pressed || isLike ? Images.like_filled : Images.like_outline
+              pressed || isLiked ? Images.like_filled : Images.like_outline
             }
             style={[
               styles.postActionsIcon,
-              (isLike || pressed) && Layout.removeTintColor,
+              (isLiked || pressed) && Layout.removeTintColor,
               animatedHeartStyle,
             ]}
             resizeMode="contain"
