@@ -8,3 +8,4 @@ export {default as ProfileScreen} from './Tabs/Profile';
 export {default as ChooseUserNameScreen} from './Auth/ChooseUserName';
 export {default as CreatePasswordScreen} from './Auth/CreatePassword';
 export {default as AddEmailScreen} from './Auth/AddEmail';
+export {default as SelectPostAssets} from './SelectPostAssets';

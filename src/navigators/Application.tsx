@@ -14,6 +14,7 @@ import {
   ChooseUserNameScreen,
   CreatePasswordScreen,
   LoginScreen,
+  SelectPostAssets,
   SplashScreen,
 } from '../screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -49,6 +50,10 @@ const ApplicationNavigator = () => {
             />
 
             <Stack.Screen name={Routes.Dashboard} component={TabNavigator} />
+            <Stack.Screen
+              name={Routes.SelectPostAssets}
+              component={SelectPostAssets}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </BottomSheetModalProvider>

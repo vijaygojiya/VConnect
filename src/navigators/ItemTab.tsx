@@ -16,6 +16,7 @@ const IteTab = ({
   route,
   onTabItemClickHandler,
   isSelected,
+  isProfileItem,
 }: ItemTab) => {
   const handleTabIconClick = () => {
     if (isSelected) {
@@ -29,7 +30,11 @@ const IteTab = ({
       onPress={handleTabIconClick}>
       <Image
         source={isSelected ? activeIcon : inActiveIcon}
-        style={styles.iconStyle}
+        style={[
+          styles.iconStyle,
+          isProfileItem && styles.profileIcon,
+          isProfileItem && isSelected && styles.profileSelectedIcon,
+        ]}
         resizeMode="contain"
       />
     </Pressable>
@@ -44,6 +49,15 @@ const styles = StyleSheet.create({
     width: Icon.regularWidth,
     marginVertical: Margin.smallPlusExtra,
     tintColor: Colors.black,
+  },
+  profileIcon: {
+    tintColor: undefined,
+  },
+  profileSelectedIcon: {
+    borderWidth: 1,
+    borderColor: Colors.black,
+
+    borderRadius: 12,
   },
   tabBarContainer: {
     width: StyleConfig.width / 5,

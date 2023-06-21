@@ -10,4 +10,5 @@ export enum Routes {
   ChooseUserNameScreen = 'ChooseUserNameScreen',
   CreatePasswordScreen = 'CreatePasswordScreen',
   AddEmailScreen = 'AddEmailScreen',
+  SelectPostAssets = 'SelectPostAssets',
 }

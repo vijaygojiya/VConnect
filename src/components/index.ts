@@ -10,3 +10,5 @@ export {default as MenuBarWithLogo} from './MenuBarWithLogo';
 export {default as PostGridItem} from './PostGridItem';
 export {default as ReelItem} from './ReelItem';
 export {default as AnimatedHeartIcon} from './AnimatedHeartIcon';
+export {default as BottomSheetHandle} from './BottomSheetHandle';
+export {default as BottomSheetItem} from './BottomSheetItem';

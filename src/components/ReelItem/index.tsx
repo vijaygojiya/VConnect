@@ -86,7 +86,7 @@ const ReelItem = ({
                 source={{uri: postsData[index].photos[0]}}
                 style={styles.profilePic}
               />
-              <Text>vm_gojiya</Text>
+              <Text style={styles.userName}>vm_gojiya</Text>
               <Text style={styles.followText}>Follow</Text>
             </View>
             <TouchableWithoutFeedback onPress={handleCaptionPress}>
@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
     ...Layout.absolute,
     height: '100%',
     width: '100%',
-    // zIndex: 2,
   },
   reelActionContainer: {
     marginVertical: Margin.small,
@@ -152,6 +151,10 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
     borderRadius: 12,
+  },
+  userName: {
+    marginHorizontal: 8,
+    color: Colors.white,
   },
   followText: {
     borderWidth: 1,

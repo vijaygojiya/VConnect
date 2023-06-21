@@ -30,6 +30,8 @@ const Images = {
   plus: require('./assets/images/plus.png'),
   chat: require('./assets/images/chat.png'),
   multi_pages: require('./assets/images/multi_pages.png'),
+
+  default_profile: require('./assets/images/default_profile.jpg'),
 };
 
 export default Images;
