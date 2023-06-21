@@ -1,16 +1,20 @@
-import {FlatList, ListRenderItem, View, ViewToken} from 'react-native';
-import React, {useRef, useState} from 'react';
-import {Layout} from '../../../theme';
+import {FlatList, ListRenderItem, ViewToken} from 'react-native';
+import React, {useCallback, useRef, useState} from 'react';
 import {reelsData} from '../../../utils/DummyData';
 import {ReelItem} from '../../../components';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
+import {useIsForeground} from '../../../hooks';
+import {useIsFocused} from '@react-navigation/native';
 
 const ReelsScreen = () => {
   const [currentReelIndex, setCurrentReelIndex] = useState(0);
+  const isFocussed = useIsFocused();
+  const isForeground = useIsForeground();
+  const isActive = isFocussed && isForeground;
 
   const {height} = useSafeAreaFrame();
 
-  const FlatlistRef = useRef<FlatList | null>(null);
+  const reelListRef = useRef<FlatList | null>(null);
 
   const viewConfigRef = useRef({viewAreaCoveragePercentThreshold: 70});
 
@@ -30,28 +34,40 @@ const ReelsScreen = () => {
     return (
       <ReelItem
         {...item}
-        isPaused={index !== currentReelIndex}
+        isPaused={isActive ? index !== currentReelIndex : false}
         index={index}
         onFinishPlayingHandler={handleOnFinishPlaying}
       />
     );
   };
 
-  const handleOnFinishPlaying = () => {
+  const handleOnFinishPlaying = useCallback(() => {
     if (currentReelIndex !== reelsData.length - 1) {
-      FlatlistRef?.current?.scrollToIndex({
+      reelListRef?.current?.scrollToIndex({
         index: currentReelIndex + 1,
       });
     } else {
-      FlatlistRef?.current?.scrollToIndex({
+      reelListRef?.current?.scrollToIndex({
         index: 0,
       });
     }
-  };
+  }, [currentReelIndex]);
 
+  const getItemLayout = useCallback(
+    (_data: any, index: number) => ({
+      length: height,
+      offset: height * index,
+      index,
+    }),
+    [height],
+  );
+
+  const getKey = useCallback((item: any, index: number) => {
+    return `reelList-${index}`;
+  }, []);
   return (
     <FlatList
-      ref={FlatlistRef}
+      ref={reelListRef}
       pagingEnabled
       data={reelsData}
       bounces={false}
@@ -59,11 +75,8 @@ const ReelsScreen = () => {
       overScrollMode="never"
       renderItem={renderReelItem}
       decelerationRate={0.9}
-      getItemLayout={(_data, index) => ({
-        length: height,
-        offset: height * index,
-        index,
-      })}
+      keyExtractor={getKey}
+      getItemLayout={getItemLayout}
       onViewableItemsChanged={onViewRef.current}
       viewabilityConfig={viewConfigRef.current}
     />

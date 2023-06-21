@@ -1,3 +1,4 @@
+import {firebaseCollection} from '../utils/Constant';
 import {uploadImage} from './firebaseUtils';
 import firestore from '@react-native-firebase/firestore';
 
@@ -12,11 +13,15 @@ export const addNewPost = async (
       const imageUri = photo.uri;
       const fileName = photo.fileName;
 
-      const imageUrl = await uploadImage(imageUri, 'posts', fileName);
+      const imageUrl = await uploadImage(
+        imageUri,
+        firebaseCollection.posts,
+        fileName,
+      );
 
       photoUrls.push(imageUrl);
     }
-    const newPostRef = firestore().collection('posts').doc();
+    const newPostRef = firestore().collection(firebaseCollection.posts).doc();
     const postId = newPostRef.id;
 
     await newPostRef.set({

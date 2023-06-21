@@ -1,5 +1,5 @@
 import {Image, Pressable, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Images, Layout} from '../../theme';
 import styles from './styles';
 import Animated, {
@@ -20,18 +20,21 @@ const PostFooter = ({
   likePostHandler,
   savePostHandler,
 }: PostFooterPropsType) => {
-  useEffect(() => {
-    handleAnimate();
-  }, [isLiked]);
+  const scale = useSharedValue(1);
 
-  const handleAnimate = () => {
+  const handleAnimate = useCallback(() => {
     scale.value = 0.8;
     scale.value = withSpring(1);
-  };
-  const scale = useSharedValue(1);
+  }, [scale]);
+
+  useEffect(() => {
+    handleAnimate();
+  }, [handleAnimate, isLiked]);
+
   const animatedHeartStyle = useAnimatedStyle(() => ({
     transform: [{scale: scale.value}],
   }));
+
   return (
     <View style={[Layout.row, styles.container]}>
       <Pressable onPress={likePostHandler}>

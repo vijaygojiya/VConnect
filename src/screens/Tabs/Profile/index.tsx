@@ -1,7 +1,12 @@
 import {View} from 'react-native';
 import React, {useCallback, useMemo, useRef} from 'react';
-import {Images, Layout} from '../../../theme';
-import {BottomSheetHandle, BottomSheetItem, Button} from '../../../components';
+import {Fonts, Images, Layout} from '../../../theme';
+import {
+  BottomSheetHandle,
+  BottomSheetItem,
+  Button,
+  GradientText,
+} from '../../../components';
 import auth from '@react-native-firebase/auth';
 import {CommonActions} from '@react-navigation/native';
 import {Routes} from '../../../navigators/routes';
@@ -68,9 +73,12 @@ const ProfileScreen = ({navigation}) => {
 
   return (
     <View style={[Layout.fill, Layout.justifyContentCenter]}>
+      <GradientText
+        style={[Fonts.textInterBold, {fontSize: 32, marginVertical: 33}]}>
+        Vijay Ahir
+      </GradientText>
       {/* <Button title="Logout" onPress={handleLogout} /> */}
       <Button title="Add new Reel" onPress={handlePresentModalPress} />
-
       <BottomSheetModal
         handleComponent={renderBottomSheetHandle}
         backdropComponent={renderBackdrop}

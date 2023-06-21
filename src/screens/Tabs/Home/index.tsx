@@ -3,19 +3,21 @@ import {
   FlatList,
   Image,
   ListRenderItem,
-  StyleSheet,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
   View,
 } from 'react-native';
-import React, {useRef} from 'react';
-import {Colors, Images, Layout} from '../../../theme';
+import React, {useCallback, useRef} from 'react';
+import {Images, Layout} from '../../../theme';
 import {dummyStoriesData, postsData} from '../../../utils/DummyData';
-import {MenuBar, MenuBarWithLogo, Post, Story} from '../../../components';
+import {MenuBarWithLogo, Post, Story} from '../../../components';
 import {getCloser} from '../../../utils/utils';
+import styles from './styles';
+import {headerHeight} from '../../../utils/Constant';
 
 const {diffClamp} = Animated;
-const headerHeight = 2 * (20 + 32);
 
-const ITEM_HEIGHT = 431.64;
+export const ITEM_HEIGHT = 431.64;
 
 const HomeScreen = () => {
   const renderPostImage: ListRenderItem<(typeof postsData)[number]> = ({
@@ -37,7 +39,13 @@ const HomeScreen = () => {
           source={{uri: dummyStoriesData[3].profilePic}}
           style={styles.userImage}
         />
-        <View style={styles.userBadge}>
+        <View
+          style={[
+            Layout.absolute,
+            Layout.right0,
+            Layout.selfCenter,
+            styles.userBadge,
+          ]}>
           <Image
             resizeMode="contain"
             source={Images.plus}
@@ -91,7 +99,9 @@ const HomeScreen = () => {
     },
   );
 
-  const handleSnap = ({nativeEvent}) => {
+  const handleSnap = ({
+    nativeEvent,
+  }: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetY = nativeEvent.contentOffset.y;
     if (
       !(
@@ -111,13 +121,34 @@ const HomeScreen = () => {
     }
   };
 
+  const handleGetKey = useCallback(
+    (item: any, index: number) =>
+      `homeFeedPostListItem-${item.post_id}${index}`,
+    [],
+  );
+
+  const getItemLayout = useCallback(
+    (_item: any, index: number) => ({
+      length: ITEM_HEIGHT,
+      offset: ITEM_HEIGHT * index,
+      index,
+    }),
+    [],
+  );
+
   return (
     <View style={[Layout.fill, styles.container]}>
-      <Animated.View style={[styles.header, {transform: [{translateY}]}]}>
-        {/* <Image source={Images.text_logo}  /> */}
+      <Animated.View
+        style={[
+          styles.header,
+          Layout.absolute,
+          Layout.left0,
+          Layout.right0,
+          Layout.fullWidth,
+          {transform: [{translateY}]},
+        ]}>
         <MenuBarWithLogo />
       </Animated.View>
-
       <Animated.FlatList
         onScroll={handleScroll}
         scrollEventThrottle={16}
@@ -125,68 +156,15 @@ const HomeScreen = () => {
         data={postsData}
         ListHeaderComponent={renderStoriesList}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) =>
-          `homeFeedPostListItem-${item.post_id}${index}`
-        }
+        keyExtractor={handleGetKey}
         renderItem={renderPostImage}
-        getItemLayout={(_, index) => ({
-          length: ITEM_HEIGHT,
-          offset: ITEM_HEIGHT * index,
-          index,
-        })}
-        contentContainerStyle={{paddingTop: headerHeight / 2}}
+        getItemLayout={getItemLayout}
+        contentContainerStyle={styles.listContentContainerStyle}
         onMomentumScrollEnd={handleSnap}
         bounces={false}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-  },
-  header: {
-    position: 'absolute',
-    backgroundColor: 'white',
-    left: 0,
-    right: 0,
-    width: '100%',
-    zIndex: 1,
-    height: headerHeight / 2,
-  },
-  userContainer: {
-    marginHorizontal: 5,
-  },
-  userImage: {
-    height: 66,
-    width: 66,
-    borderRadius: 66 / 2,
-  },
-  userBadge: {
-    position: 'absolute',
-    right: 0,
-    bottom: -4,
-    borderWidth: 2,
-    borderColor: 'white',
-    backgroundColor: 'blue',
-    alignSelf: 'center',
-    borderRadius: 12,
-  },
-  badgeImage: {
-    tintColor: 'white',
-    height: 10,
-    width: 10,
-    margin: 5,
-  },
-  storiesListContainer: {
-    padding: 10,
-  },
-  storiesList: {
-    borderTopWidth: 0.1,
-    borderColor: 'black',
-    borderBottomWidth: 0.19,
-  },
-});
 
 export default HomeScreen;

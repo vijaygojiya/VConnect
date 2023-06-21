@@ -5,8 +5,9 @@ import {
   PhotoIdentifiersPage,
 } from '@react-native-camera-roll/camera-roll';
 import {useEffect, useState} from 'react';
-import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import {PERMISSIONS, RESULTS, check, request} from 'react-native-permissions';
 
+import {Platform} from 'react-native';
 import {StyleConfig} from '../theme';
 
 export interface FetchPaginatedResult {
@@ -17,9 +18,15 @@ export interface FetchPaginatedResult {
   fetchMore: (pageSize?: number) => Promise<void>;
 }
 
-const showToast = e => {
+const showToast = (e: string) => {
   console.log('e', e);
 };
+
+const PlatformPermission = StyleConfig.isAndroid
+  ? Number(Platform.Version) >= 33
+    ? PERMISSIONS.ANDROID.READ_MEDIA_IMAGES
+    : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
+  : PERMISSIONS.IOS.PHOTO_LIBRARY;
 
 const useGallery = (pageSize = 50): FetchPaginatedResult => {
   const [data, setData] = useState<PhotoIdentifier[] | null>(null);
@@ -35,12 +42,10 @@ const useGallery = (pageSize = 50): FetchPaginatedResult => {
   }, []);
 
   const checkLocationPermission = () => {
-    check(
-      StyleConfig.isAndroid
-        ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
-        : PERMISSIONS.IOS.PHOTO_LIBRARY,
-    )
+    check(PlatformPermission)
       .then(result => {
+        console.log('checkLocationPermission', result);
+
         switch (result) {
           case RESULTS.UNAVAILABLE:
             showToast(
@@ -64,12 +69,9 @@ const useGallery = (pageSize = 50): FetchPaginatedResult => {
   };
 
   const askPermission = () => {
-    request(
-      StyleConfig.isAndroid
-        ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
-        : PERMISSIONS.IOS.PHOTO_LIBRARY,
-    )
+    request(PlatformPermission)
       .then(result => {
+        console.log('resultresultresultresult', result);
         switch (result) {
           case RESULTS.UNAVAILABLE:
             showToast(
@@ -148,8 +150,6 @@ const useGallery = (pageSize = 50): FetchPaginatedResult => {
     }
 
     newLastPageInfo = photos.page_info;
-    console.log('Last visible cursor', newLastPageInfo);
-
     if (!newLastPageInfo || !newLastPageInfo.has_next_page) {
       setHasNextPage(false);
     }
@@ -180,7 +180,7 @@ const convertCameraRollPicturesToImageDtoType = (
     return {
       uri,
       filename,
-      type: picture.type,
+      type: picture.node.type,
       // Include any other properties or transformations you need for the ImageDTO format
     };
   });
