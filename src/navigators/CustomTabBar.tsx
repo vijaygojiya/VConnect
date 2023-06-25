@@ -30,8 +30,8 @@ const TabBarList = [
     route: Routes.ReelsScreen,
   },
   {
-    inActiveIcon: Images.profile_outline,
-    activeIcon: Images.profile_filled,
+    inActiveIcon: Images.default_profile,
+    activeIcon: Images.default_profile,
     route: Routes.ProfileScreen,
   },
 ];
@@ -41,7 +41,6 @@ const CustomTabBar = (props: {navigation: any}) => {
 
   const currentIndex =
     useNavigationState(state => {
-      console.log('state', state);
       return state.routes[0].state?.index;
     }) ?? 0;
 
@@ -58,6 +57,7 @@ const CustomTabBar = (props: {navigation: any}) => {
         {...item}
         key={`custom-tab-${index}`}
         onTabItemClickHandler={onTabClick}
+        isProfileItem={index === 4}
         isSelected={index === currentIndex}
       />
     );

@@ -1,9 +1,9 @@
 import {FlatList, Image, ListRenderItem, StyleSheet, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Colors, Layout} from '../../../theme';
 import styles from './styles';
 import {postsData} from '../../../utils/DummyData';
-import {PostFooter, PostGridItem} from '../../../components';
+import {PostFooter, PostGridItem, PostHeader} from '../../../components';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -18,22 +18,8 @@ const SearchScreen = () => {
   const scale = useSharedValue(0);
 
   const navigation = useNavigation();
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', () => {
-      hideSelectedImage();
-    });
 
-    return unsubscribe;
-  }, [navigation]);
-
-  const showSelectedImage = () => {
-    scale.value = withSpring(1, {
-      damping: 10,
-      stiffness: 100,
-    });
-  };
-
-  const hideSelectedImage = () => {
+  const hideSelectedImage = useCallback(() => {
     scale.value = withSpring(
       0,
       {
@@ -46,6 +32,21 @@ const SearchScreen = () => {
         }
       },
     );
+  }, [scale]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      hideSelectedImage();
+    });
+
+    return unsubscribe;
+  }, [hideSelectedImage, navigation]);
+
+  const showSelectedImage = () => {
+    scale.value = withSpring(1, {
+      damping: 10,
+      stiffness: 100,
+    });
   };
 
   const animatedContainerStyle = useAnimatedStyle(() => {
@@ -105,6 +106,11 @@ const SearchScreen = () => {
               reducedTransparencyFallbackColor="white"
             />
             <Animated.View style={[styles.imageContainer, animatedImageStyle]}>
+              <PostHeader
+                userName="vm_gojiya"
+                userProfilePic={postsData[0].photos[0]}
+                location="Hidden in the leaves"
+              />
               <Image
                 source={{uri: selectedPostImage}}
                 style={[styles.selectedImage]}

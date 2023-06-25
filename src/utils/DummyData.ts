@@ -1,3 +1,5 @@
+import videos from '../theme/assets/videos';
+
 export const postUrls = [
   'https://plus.unsplash.com/premium_photo-1683639549573-bcc2db33dc15?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60',
   'https://images.unsplash.com/photo-1684936193634-655c7ff53b20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60',
@@ -303,5 +305,26 @@ export const dummyStoriesData = [
         viewedBy: ['user1'],
       },
     ],
+  },
+];
+
+export const reelsData = [
+  {
+    url: videos.video1,
+  },
+  {
+    url: videos.video2,
+  },
+  {
+    url: videos.video3,
+  },
+  {
+    url: videos.video4,
+  },
+  {
+    url: videos.video5,
+  },
+  {
+    url: videos.video6,
   },
 ];

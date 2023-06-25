@@ -21,3 +21,9 @@ export enum FirebaseOrderByDirection {
   Ascending = 'asc',
   Descending = 'desc',
 }
+
+export enum TypeOfEditProfile {
+  Name,
+  UserName,
+  Bio,
+}

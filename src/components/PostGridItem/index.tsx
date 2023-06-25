@@ -39,6 +39,7 @@ const PostGridItem = ({
     }
     return null;
   }, [isVideo, isMultiplePosts]);
+
   const handleLongPress = () => {
     setSelectedPostImage(photos[0]);
     opacity.value = withTiming(0.5, {duration: 150});
@@ -66,7 +67,6 @@ const PostGridItem = ({
           Layout.absolute,
           StyleSheet.absoluteFill,
           animatedOpacityStyle,
-          {backgroundColor: 'black'},
         ]}
       />
     </Pressable>

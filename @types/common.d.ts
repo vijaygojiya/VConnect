@@ -1,6 +1,7 @@
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 
 export interface UserDataType {
+  userId: string;
   AccountId: string | undefined;
   Bio: string | undefined;
   DateCreated: FirebaseFirestoreTypes.Timestamp;
@@ -47,20 +48,21 @@ export interface UploadImageToNftType {
 }
 
 export interface PostDataType {
-  accountId: string;
+  post_id: number;
+  user_id: number;
   caption: string;
-  comments: number;
-  likeCount: string[];
-  mediaType: 'image' | 'video';
-  postId: string;
-  profileUrl: string;
-  sellPrice: number | string;
-  src: string;
-  timeStamp: number;
-  tokenId: number;
-  uniqueId: StringConstructor;
-  userId: string;
-  userName: string;
+  photos: string[];
+  likes: number;
+  saved_by: number[];
+  comments: {
+    user_id: number;
+    comment: string;
+  }[];
+  shares: number;
+  hidden_by: number[];
+  reported_by: number[];
+  created_at: string;
+  updated_at: string;
 }
 
 interface PostDataTypeWithUser extends UserDataType {

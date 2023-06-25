@@ -1,5 +1,5 @@
 import {Image, Pressable, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Images, Layout} from '../../theme';
 import styles from './styles';
 import Animated, {
@@ -9,40 +9,43 @@ import Animated, {
 } from 'react-native-reanimated';
 
 interface PostFooterPropsType {
-  isLike: boolean;
+  isLiked: boolean;
   isSaved: boolean;
   likePostHandler: () => void;
   savePostHandler: () => void;
 }
 const PostFooter = ({
-  isLike,
+  isLiked,
   isSaved,
   likePostHandler,
   savePostHandler,
 }: PostFooterPropsType) => {
-  useEffect(() => {
-    handleAnimate();
-  }, [isLike]);
+  const scale = useSharedValue(1);
 
-  const handleAnimate = () => {
+  const handleAnimate = useCallback(() => {
     scale.value = 0.8;
     scale.value = withSpring(1);
-  };
-  const scale = useSharedValue(1);
+  }, [scale]);
+
+  useEffect(() => {
+    handleAnimate();
+  }, [handleAnimate, isLiked]);
+
   const animatedHeartStyle = useAnimatedStyle(() => ({
     transform: [{scale: scale.value}],
   }));
+
   return (
     <View style={[Layout.row, styles.container]}>
       <Pressable onPress={likePostHandler}>
         {({pressed}) => (
           <Animated.Image
             source={
-              pressed || isLike ? Images.like_filled : Images.like_outline
+              pressed || isLiked ? Images.like_filled : Images.like_outline
             }
             style={[
               styles.postActionsIcon,
-              (isLike || pressed) && Layout.removeTintColor,
+              (isLiked || pressed) && Layout.removeTintColor,
               animatedHeartStyle,
             ]}
             resizeMode="contain"

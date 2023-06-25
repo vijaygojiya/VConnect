@@ -1,6 +1,6 @@
 import {
   FlatList,
-  ImageBackground,
+  Image,
   ListRenderItem,
   Text,
   View,
@@ -11,15 +11,11 @@ import React, {useRef, useState} from 'react';
 import styles from './styles';
 import PostHeader from '../PostHeader';
 import PostFooter from '../PostFooter';
-import {Fonts, Images, Layout, StyleConfig} from '../../theme';
+import {Fonts, StyleConfig} from '../../theme';
 import DoubleTap from '../DoubleTap';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
+
+import AnimatedHeartIcon from '../AnimatedHeartIcon';
+import {useLikeAnimation} from '../../hooks';
 
 interface PostPropsType {
   post_id: number;
@@ -41,29 +37,22 @@ interface PostPropsType {
 
 const ITEM_WIDTH = StyleConfig.width;
 const Post = ({photos}: PostPropsType) => {
-  const [isLike, setIsLiked] = useState(false);
   const [isSaved, setSaved] = useState(false);
 
+  const {
+    isLiked,
+    animatedHeartIconStyle,
+    handleDoubleTapForLikePost,
+    handleLikePost,
+  } = useLikeAnimation();
+
   const [selectedPostIndex, setSelectedPostIndex] = useState(0);
-  const scale = useSharedValue(0);
 
   const renderPostPhotoItem: ListRenderItem<string> = ({item}) => {
     return (
-      <ImageBackground
-        source={{uri: item}}
-        resizeMode="cover"
-        style={[styles.postPhoto, Layout.center]}>
-        <Animated.Image
-          source={Images.like_filled}
-          style={[styles.heartIcon, animatedHeartIconStyle]}
-        />
-      </ImageBackground>
+      <Image source={{uri: item}} resizeMode="cover" style={styles.postPhoto} />
     );
   };
-
-  const animatedHeartIconStyle = useAnimatedStyle(() => ({
-    transform: [{scale: Math.max(scale.value, 0)}],
-  }));
 
   const handleSingleTapOnPostImage = () => {
     console.log('single tap');
@@ -78,22 +67,6 @@ const Post = ({photos}: PostPropsType) => {
     },
   );
   const viewConfigRef = useRef({viewAreaCoveragePercentThreshold: 50});
-
-  const handleDoubleTapForLikePost = () => {
-    if (!isLike) {
-      setIsLiked(true);
-    }
-    scale.value = 0;
-    scale.value = withSpring(1, {velocity: 10}, isFinished => {
-      if (isFinished) {
-        scale.value = withDelay(200, withTiming(0, {duration: 200}));
-      }
-    });
-  };
-
-  const handleLikePost = () => {
-    setIsLiked(prev => !prev);
-  };
 
   const handleSavePost = () => {
     setSaved(prev => !prev);
@@ -126,6 +99,7 @@ const Post = ({photos}: PostPropsType) => {
           })}
         />
       </DoubleTap>
+      <AnimatedHeartIcon animatedHeartIconStyle={animatedHeartIconStyle} />
       {photos.length > 1 ? (
         <Text
           style={[
@@ -137,7 +111,7 @@ const Post = ({photos}: PostPropsType) => {
         </Text>
       ) : null}
       <PostFooter
-        isLike={isLike}
+        isLiked={isLiked}
         isSaved={isSaved}
         likePostHandler={handleLikePost}
         savePostHandler={handleSavePost}

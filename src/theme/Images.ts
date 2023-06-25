@@ -21,6 +21,7 @@ const Images = {
 
   like_outline: require('./assets/images/heart.png'),
   like_filled: require('./assets/images/heart_active.png'),
+  like_filled_HQ: require('./assets/images/heart_HQ.png'),
 
   comment: require('./assets/images/comment.png'),
   share: require('./assets/images/share.png'),
@@ -29,6 +30,14 @@ const Images = {
   plus: require('./assets/images/plus.png'),
   chat: require('./assets/images/chat.png'),
   multi_pages: require('./assets/images/multi_pages.png'),
+
+  default_profile: require('./assets/images/default_profile.jpg'),
+  post_grid: require('./assets/images/post-grid.png'),
+  user_tag: require('./assets/images/tag.png'),
+  chevron: require('./assets/images/chevron.png'),
+  arrow: require('./assets/images/arrow.png'),
+  follow_user: require('./assets/images/follow_user.png'),
+  close: require('./assets/images/close.png'),
 };
 
 export default Images;

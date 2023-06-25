@@ -71,6 +71,8 @@ export const BorderWidth = {
 };
 
 export const Icon = {
+  largeHeight: 77,
+  largeWidth: 77,
   defaultPlusHeight: 58,
   defaultPlusWidth: 58,
   defaultHeight: 40,
