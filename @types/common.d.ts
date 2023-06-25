@@ -1,6 +1,7 @@
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 
 export interface UserDataType {
+  userId: string;
   AccountId: string | undefined;
   Bio: string | undefined;
   DateCreated: FirebaseFirestoreTypes.Timestamp;

@@ -13,12 +13,16 @@ import {
   AddEmailScreen,
   ChooseUserNameScreen,
   CreatePasswordScreen,
+  EditProfileScreen,
   LoginScreen,
+  NewPostScreen,
   SelectPostAssets,
   SplashScreen,
 } from '../screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import TabNavigator from './TabNavigator';
+import {StyleSheet} from 'react-native';
+import {Colors} from '../theme';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +37,7 @@ const ApplicationNavigator = () => {
             screenOptions={{
               headerShown: false,
               animation: 'slide_from_left',
+              contentStyle: styles.navigationContainer,
             }}>
             <Stack.Screen name={Routes.SplashScreen} component={SplashScreen} />
             <Stack.Screen name={Routes.LogInScreen} component={LoginScreen} />
@@ -48,11 +53,26 @@ const ApplicationNavigator = () => {
               name={Routes.AddEmailScreen}
               component={AddEmailScreen}
             />
-
             <Stack.Screen name={Routes.Dashboard} component={TabNavigator} />
             <Stack.Screen
+              options={{
+                animation: 'slide_from_bottom',
+                gestureDirection: 'vertical',
+              }}
               name={Routes.SelectPostAssets}
               component={SelectPostAssets}
+            />
+            <Stack.Screen
+              name={Routes.NewPostScreen}
+              component={NewPostScreen}
+            />
+            <Stack.Screen
+              options={{
+                animation: 'slide_from_bottom',
+                gestureDirection: 'vertical',
+              }}
+              name={Routes.EditProfileScreen}
+              component={EditProfileScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>
@@ -62,3 +82,9 @@ const ApplicationNavigator = () => {
 };
 
 export default ApplicationNavigator;
+
+const styles = StyleSheet.create({
+  navigationContainer: {
+    backgroundColor: Colors.white,
+  },
+});

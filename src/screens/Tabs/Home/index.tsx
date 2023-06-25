@@ -7,19 +7,29 @@ import {
   NativeSyntheticEvent,
   View,
 } from 'react-native';
-import React, {useCallback, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import {Images, Layout} from '../../../theme';
 import {dummyStoriesData, postsData} from '../../../utils/DummyData';
 import {MenuBarWithLogo, Post, Story} from '../../../components';
 import {getCloser} from '../../../utils/utils';
 import styles from './styles';
 import {headerHeight} from '../../../utils/Constant';
+import {useUser} from '../../../hooks';
 
 const {diffClamp} = Animated;
 
 export const ITEM_HEIGHT = 431.64;
 
 const HomeScreen = () => {
+  // const {storedUser,setStoredUser} = useUser();
+  // console.log('_storedUser', storedUser);
+
+  // useEffect(()=>{
+
+  // },[])
+  // const fetchUserData = ()=>{
+
+  // }
   const renderPostImage: ListRenderItem<(typeof postsData)[number]> = ({
     item,
   }) => {

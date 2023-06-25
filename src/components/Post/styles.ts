@@ -4,7 +4,7 @@ import {Colors, Padding, Sizes, StyleConfig} from '../../theme';
 const styles = StyleSheet.create({
   postPhoto: {
     width: StyleConfig.width,
-    aspectRatio: 5 / 4,
+    aspectRatio: 4 / 5,
     backgroundColor: Colors.gray,
   },
 

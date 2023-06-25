@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Colors, Layout} from '../../../theme';
 import styles from './styles';
 import {postsData} from '../../../utils/DummyData';
-import {PostFooter, PostGridItem} from '../../../components';
+import {PostFooter, PostGridItem, PostHeader} from '../../../components';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -33,7 +33,7 @@ const SearchScreen = () => {
       },
     );
   }, [scale]);
-  
+
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       hideSelectedImage();
@@ -106,6 +106,11 @@ const SearchScreen = () => {
               reducedTransparencyFallbackColor="white"
             />
             <Animated.View style={[styles.imageContainer, animatedImageStyle]}>
+              <PostHeader
+                userName="vm_gojiya"
+                userProfilePic={postsData[0].photos[0]}
+                location="Hidden in the leaves"
+              />
               <Image
                 source={{uri: selectedPostImage}}
                 style={[styles.selectedImage]}

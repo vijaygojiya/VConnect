@@ -34,7 +34,7 @@ const useUserRegistration = () => {
           userId: authUser.user.uid,
           email,
           userName,
-          fullName: '',
+          name: '',
           bio: '',
           profilePic: '',
           followers: [],

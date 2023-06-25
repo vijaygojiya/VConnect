@@ -13,3 +13,4 @@ export {default as AnimatedHeartIcon} from './AnimatedHeartIcon';
 export {default as BottomSheetHandle} from './BottomSheetHandle';
 export {default as BottomSheetItem} from './BottomSheetItem';
 export {default as GradientText} from './GradientText';
+export {default as ProfileUserInfo} from './ProfileUserInfo';

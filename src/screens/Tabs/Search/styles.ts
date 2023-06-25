@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     elevation: 19,
   },
   selectedImage: {
-    width: StyleConfig.width - 2 * Margin.small,
-    height: StyleConfig.height / 2,
+    width: StyleConfig.width,
+    aspectRatio: 4 / 5,
     backgroundColor: Colors.white,
   },
 });

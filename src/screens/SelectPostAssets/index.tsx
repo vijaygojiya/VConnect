@@ -3,19 +3,12 @@ import {View, FlatList, Image, StyleSheet, Pressable} from 'react-native';
 import {Colors, Images, Layout, StyleConfig} from '../../theme';
 import {useGallery} from '../../hooks';
 import {MenuBar} from '../../components';
+import {Routes} from '../../navigators/routes';
 
-const SelectPostAssets = () => {
+const SelectPostAssets = ({navigation}) => {
   const [selectedAssetIndex, setSelectedAssetIndex] = useState(0);
 
-  const {data, fetchMore, hasNextPage, isLoading, folders} = useGallery();
-  console.log(
-    'data, fetchMore, hasNextPage, isLoading, folders',
-    data,
-    // fetchMore,
-    hasNextPage,
-    isLoading,
-    // folders,
-  );
+  const {data, fetchMore, hasNextPage} = useGallery();
 
   const renderItem = ({item, index}) => {
     return (
@@ -28,62 +21,60 @@ const SelectPostAssets = () => {
     );
   };
 
-  console.log('data?.[selectedAssetIndex].uri', data?.[selectedAssetIndex].uri);
+  const handleFetchMorePhotos = () => {
+    if (!hasNextPage) {
+      return;
+    }
+    fetchMore(12);
+  };
 
   return (
     <View style={[Layout.fill]}>
-      <MenuBar title="create aa post" leftIcon={Images.array} />
+      <MenuBar
+        title="All"
+        leftIcon={Images.close}
+        onLeftClickListener={navigation.goBack}
+        rightIcon={Images.arrow}
+        rightIconStyle={[Layout.mirror, styles.arrowIcon]}
+        onRightClickListener={() => {
+          navigation.navigate(Routes.NewPostScreen, {
+            selectedAssetData: data[selectedAssetIndex],
+          });
+        }}
+      />
       <Image
-        source={{uri: data?.[selectedAssetIndex].uri}}
+        source={{uri: data?.[selectedAssetIndex]?.uri}}
         style={styles.selectedAsset}
-        resizeMode="contain"
       />
       <FlatList
         numColumns={3}
-        columnWrapperStyle={{gap: 1}}
-        contentContainerStyle={{gap: 1}}
+        columnWrapperStyle={styles.gap}
+        contentContainerStyle={styles.gap}
         showsVerticalScrollIndicator={false}
         data={data}
         renderItem={renderItem}
         onEndReachedThreshold={0.5}
-        onEndReached={() => {
-          fetchMore(12);
-        }}
+        onEndReached={handleFetchMorePhotos}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  listContent: {
-    flexGrow: 1,
-  },
   image: {
     width: (StyleConfig.width - 2) / 3,
     aspectRatio: 1,
   },
   selectedAsset: {
     width: StyleConfig.width,
-    aspectRatio: 5 / 4,
+    aspectRatio: 4 / 5,
     backgroundColor: Colors.gray,
   },
-  cameraContainer: {
-    flex: 1,
+  gap: {
+    gap: 1,
   },
-  camera: {
-    flex: 1,
-  },
-  closeButton: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    backgroundColor: 'white',
-    padding: 8,
-    borderRadius: 8,
-  },
-  closeButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
+  arrowIcon: {
+    tintColor: Colors.blue,
   },
 });
 

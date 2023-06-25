@@ -97,7 +97,7 @@ const useGallery = (pageSize = 50): FetchPaginatedResult => {
   const getFolders = async () => {
     fetchInitialPhotos();
     try {
-      const albumsData = await CameraRoll.getAlbums();
+      const albumsData = await CameraRoll.getAlbums({assetType: 'Photos'});
       const sortData = albumsData.sort(function (a, b) {
         return a.title.localeCompare(b.title);
       });
@@ -145,7 +145,7 @@ const useGallery = (pageSize = 50): FetchPaginatedResult => {
       photos = await CameraRoll.getPhotos({
         first: _pageSize,
         include: ['filename'],
-        assetType: 'All',
+        assetType: 'Photos',
       });
     }
 

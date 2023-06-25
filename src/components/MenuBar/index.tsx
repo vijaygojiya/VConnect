@@ -59,8 +59,8 @@ const MenuBar = React.memo(
           <Text
             style={[
               Layout.fill,
-              Fonts.textSemiMedium,
-              Fonts.textMontserratBold,
+              Fonts.textInterBold,
+              Fonts.textMediumIntermediate,
               styles.textStyle,
               textStyle,
             ]}>
@@ -68,10 +68,7 @@ const MenuBar = React.memo(
           </Text>
           {rightIcon && (
             <Pressable
-              style={[
-                Layout.center,
-                styles.iconContainer,
-              ]}
+              style={[Layout.center, styles.iconContainer]}
               onPress={onRightClickListener}
               hitSlop={10}>
               <Image
